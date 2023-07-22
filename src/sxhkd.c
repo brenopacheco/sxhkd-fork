@@ -369,22 +369,21 @@ void put_status(char c, const char *s)
 
 
 bool debounce(xcb_keysym_t keysym, uint8_t event_type) {
-  if (!ms_debounce)
-    return true;
-  bool result = true;
-  struct timeval current_time;
-  gettimeofday(&current_time, NULL);
-  if (keysym == record->keysym && event_type == XCB_KEY_PRESS &&
-      record->event_type == XCB_KEY_RELEASE) {
-    double elapsed_secs = (current_time.tv_sec - record->timestamp.tv_sec);
-    double elapsed_usecs = (current_time.tv_usec - record->timestamp.tv_usec);
-    double elapsed_ms = elapsed_secs * 1000.0 + elapsed_usecs / 1000.0;
-    if (elapsed_ms < ms_debounce)
-      result = false;
-  }
-  record->keysym = keysym;
-  record->event_type = event_type;
-  record->timestamp.tv_sec = current_time.tv_sec;
-  record->timestamp.tv_usec = current_time.tv_usec;
-  return result;
+	if (!ms_debounce)
+		return true;
+	bool result = true;
+	struct timeval current_time;
+	gettimeofday(&current_time, NULL);
+	if (keysym == record->keysym && event_type == XCB_KEY_PRESS && record->event_type == XCB_KEY_RELEASE) {
+		double elapsed_secs = (current_time.tv_sec - record->timestamp.tv_sec);
+		double elapsed_usecs = (current_time.tv_usec - record->timestamp.tv_usec);
+		double elapsed_ms = elapsed_secs * 1000.0 + elapsed_usecs / 1000.0;
+		if (elapsed_ms < ms_debounce)
+			result = false;
+	}
+	record->keysym = keysym;
+	record->event_type = event_type;
+	record->timestamp.tv_sec = current_time.tv_sec;
+	record->timestamp.tv_usec = current_time.tv_usec;
+	return result;
 }
