@@ -80,7 +80,7 @@ typedef struct evt_record evt_record;
 struct evt_record {
 	xcb_keysym_t keysym;
 	uint8_t event_type;
-  struct timeval timestamp;
+	struct timeval timestamp;
 };
 
 hotkey_t *find_hotkey(xcb_keysym_t keysym, xcb_button_t button, uint16_t modfield, uint8_t event_type, bool *replay_event);
