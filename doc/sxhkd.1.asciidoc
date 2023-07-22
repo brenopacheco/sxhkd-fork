@@ -49,7 +49,7 @@ Options
     Name of the keysym used for aborting chord chains.
 
 *-d* _MS_DEBOUNCE_::
-	Debounce time between key release and keypress events.
+    Debounce time between key release and keypress events.
 
 
 Behavior
